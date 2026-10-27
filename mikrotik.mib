@@ -1,3 +1,17 @@
+-- ============================================================================
+-- MIKROTIK-MIB - versione "translated"
+--
+-- Identica alla MIB originale MikroTik per nomi, OID e tipi, con queste aggiunte
+-- pensate per mostrare valori leggibili invece dei numeri grezzi:
+--   * UNITS per i valori con unita' di misura (dBm, dB, MHz, bits/second, bytes,
+--     packets, V, W, mA, rpm, %, epoch UNIX ...), ricavate dalle descrizioni e dai nomi
+--   * mtxrDnConnected e mtxrValid: da Integer32 a enumerazione / BoolValue (0/1)
+--   * DESCRIPTION vuote o composte solo dall'unita' sostituite da "Unit: ..."
+-- Le scale (Temperature, Voltage, Power, IDiv10, GDiv1000 ...) sono gia' definite
+-- dalle TEXTUAL-CONVENTION con DISPLAY-HINT "d-N" dell'originale.
+-- Non cambia nessun OID: e' sostituibile alla MIB originale.
+-- ============================================================================
+
 MIKROTIK-MIB DEFINITIONS ::= BEGIN
 
 IMPORTS
@@ -159,23 +173,26 @@ mtxrWlStatIndex OBJECT-TYPE
 
 mtxrWlStatTxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlStatEntry 2 }
 
 mtxrWlStatRxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlStatEntry 3 }
 
 mtxrWlStatStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlStatEntry 4 }
 
 mtxrWlStatSsid OBJECT-TYPE
@@ -194,9 +211,10 @@ mtxrWlStatBssid OBJECT-TYPE
 
 mtxrWlStatFreq OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "MHz"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "megahertz"
+    DESCRIPTION "Unit: MHz."
     ::= { mtxrWlStatEntry 7 }
 
 mtxrWlStatBand OBJECT-TYPE
@@ -208,16 +226,18 @@ mtxrWlStatBand OBJECT-TYPE
 
 mtxrWlStatTxCCQ OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "%"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: %."
     ::= { mtxrWlStatEntry 9 }
 
 mtxrWlStatRxCCQ OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "%"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: %."
     ::= { mtxrWlStatEntry 10 }
 
 -- WlRtabTable
@@ -276,51 +296,58 @@ mtxrWlRtabIface OBJECT-TYPE
 
 mtxrWlRtabStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 3 }
 
 mtxrWlRtabTxBytes OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrWlRtabEntry 4 }
 
 mtxrWlRtabRxBytes OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrWlRtabEntry 5 }
 
 mtxrWlRtabTxPackets OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrWlRtabEntry 6 }
 
 mtxrWlRtabRxPackets OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrWlRtabEntry 7 }
 
 mtxrWlRtabTxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlRtabEntry 8 }
 
 mtxrWlRtabRxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlRtabEntry 9 }
 
 mtxrWlRtabRouterOSVersion OBJECT-TYPE
@@ -339,6 +366,7 @@ mtxrWlRtabUptime OBJECT-TYPE
 
 mtxrWlRtabSignalToNoise OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Measured in dB, if value does not exist it is indicated with 0"
@@ -346,51 +374,58 @@ mtxrWlRtabSignalToNoise OBJECT-TYPE
 
 mtxrWlRtabTxStrengthCh0 OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 13 }
 
 mtxrWlRtabRxStrengthCh0 OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 14 }
 
 mtxrWlRtabTxStrengthCh1 OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 15 }
 
 mtxrWlRtabRxStrengthCh1 OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 16 }
 
 mtxrWlRtabTxStrengthCh2 OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 17 }
 
 mtxrWlRtabRxStrengthCh2 OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 18 }
 
 mtxrWlRtabTxStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlRtabEntry 19 }
 
 mtxrWlRtabRadioName OBJECT-TYPE
@@ -445,16 +480,18 @@ mtxrWlApIndex OBJECT-TYPE
 
 mtxrWlApTxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlApEntry 2 }
 
 mtxrWlApRxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlApEntry 3 }
 
 mtxrWlApSsid OBJECT-TYPE
@@ -480,9 +517,10 @@ mtxrWlApClientCount OBJECT-TYPE
 
 mtxrWlApFreq OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "MHz"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "megahertz"
+    DESCRIPTION "Unit: MHz."
     ::= { mtxrWlApEntry 7 }
 
 mtxrWlApBand OBJECT-TYPE
@@ -494,16 +532,18 @@ mtxrWlApBand OBJECT-TYPE
 
 mtxrWlApNoiseFloor OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlApEntry 9 }
 
 mtxrWlApOverallTxCCQ OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "%"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: %."
     ::= { mtxrWlApEntry 10 }
 
 mtxrWlApAuthClientCount OBJECT-TYPE
@@ -569,58 +609,66 @@ mtxrWlCMRtabUptime OBJECT-TYPE
 
 mtxrWlCMRtabTxBytes OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrWlCMRtabEntry 4 }
 
 mtxrWlCMRtabRxBytes OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrWlCMRtabEntry 5 }
 
 mtxrWlCMRtabTxPackets OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrWlCMRtabEntry 6 }
 
 mtxrWlCMRtabRxPackets OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrWlCMRtabEntry 7 }
 
 mtxrWlCMRtabTxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlCMRtabEntry 8 }
 
 mtxrWlCMRtabRxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrWlCMRtabEntry 9 }
 
 mtxrWlCMRtabTxStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlCMRtabEntry 10 }
 
 mtxrWlCMRtabRxStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrWlCMRtabEntry 11 }
 
 mtxrWlCMRtabSsid OBJECT-TYPE
@@ -841,9 +889,10 @@ mtxrWl60GRemote OBJECT-TYPE
 
 mtxrWl60GFreq OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "MHz"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "Mhz"
+    DESCRIPTION "Unit: MHz."
     ::= { mtxrWl60GEntry 6 }
 
 mtxrWl60GMcs OBJECT-TYPE
@@ -960,9 +1009,10 @@ mtxrWl60GStaTxSector OBJECT-TYPE
 
 mtxrWl60GStaPhyRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "Mbit/s"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "Mbits per second"
+    DESCRIPTION "Unit: Mbit/s."
     ::= { mtxrWl60GStaEntry 8 }
 
 mtxrWl60GStaRssi OBJECT-TYPE
@@ -974,9 +1024,10 @@ mtxrWl60GStaRssi OBJECT-TYPE
 
 mtxrWl60GStaDistance OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "m"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "meters"
+    DESCRIPTION "Unit: m."
     ::= { mtxrWl60GStaEntry 10 }
 
 
@@ -1141,30 +1192,34 @@ mtxrQueueSimpleIface OBJECT-TYPE
 
 mtxrQueueSimpleBytesIn OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrQueueSimpleEntry 8 }
 
 mtxrQueueSimpleBytesOut OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrQueueSimpleEntry 9 }
 
 mtxrQueueSimplePacketsIn OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrQueueSimpleEntry 10 }
 
 mtxrQueueSimplePacketsOut OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrQueueSimpleEntry 11 }
 
 mtxrQueueSimplePCQQueuesIn OBJECT-TYPE
@@ -1252,23 +1307,26 @@ mtxrQueueTreeParentIndex OBJECT-TYPE
 
 mtxrQueueTreeBytes OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrQueueTreeEntry 5 }
 
 mtxrQueueTreePackets OBJECT-TYPE
     SYNTAX Counter32
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrQueueTreeEntry 6 }
 
 mtxrQueueTreeHCBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrQueueTreeEntry 7 }
 
 mtxrQueueTreePCQQueues OBJECT-TYPE
@@ -1308,6 +1366,7 @@ mtxrQueueGroup OBJECT-GROUP OBJECTS {
 
 mtxrHlCoreVoltage OBJECT-TYPE
     SYNTAX Voltage
+    UNITS "V"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "core voltage"
@@ -1315,6 +1374,7 @@ mtxrHlCoreVoltage OBJECT-TYPE
 
 mtxrHlThreeDotThreeVoltage OBJECT-TYPE
     SYNTAX Voltage
+    UNITS "V"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "3.3V voltage"
@@ -1322,6 +1382,7 @@ mtxrHlThreeDotThreeVoltage OBJECT-TYPE
 
 mtxrHlFiveVoltage OBJECT-TYPE
     SYNTAX Voltage
+    UNITS "V"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "5V voltage"
@@ -1329,6 +1390,7 @@ mtxrHlFiveVoltage OBJECT-TYPE
 
 mtxrHlTwelveVoltage OBJECT-TYPE
     SYNTAX Voltage
+    UNITS "V"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "12V voltage"
@@ -1336,6 +1398,7 @@ mtxrHlTwelveVoltage OBJECT-TYPE
 
 mtxrHlSensorTemperature OBJECT-TYPE
     SYNTAX Temperature
+    UNITS "degrees Celsius"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "temperature at sensor chip"
@@ -1343,6 +1406,7 @@ mtxrHlSensorTemperature OBJECT-TYPE
 
 mtxrHlCpuTemperature OBJECT-TYPE
     SYNTAX Temperature
+    UNITS "degrees Celsius"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "temperature near cpu"
@@ -1350,16 +1414,18 @@ mtxrHlCpuTemperature OBJECT-TYPE
 
 mtxrHlBoardTemperature OBJECT-TYPE
     SYNTAX Temperature
+    UNITS "degrees Celsius"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: degrees Celsius."
     ::= { mtxrHealth 7 }
 
 mtxrHlVoltage OBJECT-TYPE
     SYNTAX Voltage
+    UNITS "V"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: V."
     ::= { mtxrHealth 8 }
 
 mtxrHlActiveFan OBJECT-TYPE
@@ -1371,37 +1437,42 @@ mtxrHlActiveFan OBJECT-TYPE
 
 mtxrHlTemperature OBJECT-TYPE
     SYNTAX Temperature
+    UNITS "degrees Celsius"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: degrees Celsius."
     ::= { mtxrHealth 10 }
 
 mtxrHlProcessorTemperature OBJECT-TYPE
     SYNTAX Temperature
+    UNITS "degrees Celsius"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: degrees Celsius."
     ::= { mtxrHealth 11 }
 
 mtxrHlPower OBJECT-TYPE
     SYNTAX Power
+    UNITS "W"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "Watts"
+    DESCRIPTION "Unit: W."
     ::= { mtxrHealth 12 }
 
 mtxrHlCurrent OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "mA"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "mA"
+    DESCRIPTION "Unit: mA."
     ::= { mtxrHealth 13 }
 
 mtxrHlProcessorFrequency OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "MHz"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "Mhz"
+    DESCRIPTION "Unit: MHz."
     ::= { mtxrHealth 14 }
 
 mtxrHlPowerSupplyState OBJECT-TYPE
@@ -1420,16 +1491,18 @@ mtxrHlBackupPowerSupplyState OBJECT-TYPE
 
 mtxrHlFanSpeed1 OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "rpm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "rpm"
+    DESCRIPTION "Unit: rpm."
     ::= { mtxrHealth 17 }
 
 mtxrHlFanSpeed2 OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "rpm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "rpm"
+    DESCRIPTION "Unit: rpm."
     ::= { mtxrHealth 18 }
 
 mtxrAlarmSocketStatus OBJECT-TYPE
@@ -1677,44 +1750,50 @@ mtxrHotspotActiveUserPingTimeout OBJECT-TYPE
 
 mtxrHotspotActiveUserBytesIn OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrHotspotActiveUsersTableEntry 12 }
 
 mtxrHotspotActiveUserBytesOut OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrHotspotActiveUsersTableEntry 13 }
 
 mtxrHotspotActiveUserPacketsIn OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrHotspotActiveUsersTableEntry 14 }
 
 mtxrHotspotActiveUserPacketsOut OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrHotspotActiveUsersTableEntry 15 }
 
 mtxrHotspotActiveUserLimitBytesIn OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrHotspotActiveUsersTableEntry 16 }
 
 mtxrHotspotActiveUserLimitBytesOut OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrHotspotActiveUsersTableEntry 17 }
 
 mtxrHotspotActiveUserAdvertStatus OBJECT-TYPE
@@ -1812,6 +1891,7 @@ mtxrSystemReboot OBJECT-TYPE
 
 mtxrUSBPowerReset OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "seconds"
     MAX-ACCESS read-write
     STATUS current
     DESCRIPTION "switches off usb power for specified amout of seconds"
@@ -2009,34 +2089,38 @@ mtxrDnStatIndex OBJECT-TYPE
 
 mtxrDnStatTxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrDnStatEntry 2 }
 
 mtxrDnStatRxRate OBJECT-TYPE
     SYNTAX Gauge32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "bits per second"
+    DESCRIPTION "Unit: bits/second."
     ::= { mtxrDnStatEntry 3 }
 
 mtxrDnStatTxStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrDnStatEntry 4 }
 
 mtxrDnStatRxStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrDnStatEntry 5 }
 
 mtxrDnConnected OBJECT-TYPE
-    SYNTAX Integer32
+    SYNTAX INTEGER { notConnected(0), connected(1) }
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "0 - not connected, connected otherwise"
@@ -2151,9 +2235,10 @@ mtxrNeighborGroup OBJECT-GROUP OBJECTS {
 
 mtxrDate OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "seconds since 1970 (epoch)"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "UNIX time"
+    DESCRIPTION "Unit: seconds since 1970 (UNIX time)."
     ::= { mtxrGps 1 }
 
 mtxrLongtitude OBJECT-TYPE
@@ -2192,7 +2277,7 @@ mtxrSattelites OBJECT-TYPE
     ::= { mtxrGps 6 }
 
 mtxrValid OBJECT-TYPE
-    SYNTAX Integer32
+    SYNTAX BoolValue
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "is the data valid"
@@ -2215,6 +2300,7 @@ mtxrGPSGroup OBJECT-GROUP OBJECTS {
 
 mtxrWirelessModemSignalStrength OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "signal strength in dBm (if first ppp-client modem supports)"
@@ -2222,6 +2308,7 @@ mtxrWirelessModemSignalStrength OBJECT-TYPE
 
 mtxrWirelessModemSignalECIO OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "signal EC/IO in dB (if first ppp-client modem supports)"
@@ -2278,6 +2365,7 @@ mtxrWirelessModemFrameErrorRate OBJECT-TYPE
 
 mtxrWirelessModemRSRP OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Reference Signal Receive Power"
@@ -2285,6 +2373,7 @@ mtxrWirelessModemRSRP OBJECT-TYPE
 
 mtxrWirelessModemRSRQ OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Reference Signal Received Quality"
@@ -2292,6 +2381,7 @@ mtxrWirelessModemRSRQ OBJECT-TYPE
 
 mtxrWirelessModemSINR OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Signal-to-Interference-plus-Noise Ratio"
@@ -2434,30 +2524,34 @@ mtxrInterfaceStatsName OBJECT-TYPE
 
 mtxrInterfaceStatsDriverRxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrInterfaceStatsEntry 11 }
 
 mtxrInterfaceStatsDriverRxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrInterfaceStatsEntry 12 }
 
 mtxrInterfaceStatsDriverTxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrInterfaceStatsEntry 13 }
 
 mtxrInterfaceStatsDriverTxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrInterfaceStatsEntry 14 }
 
 mtxrInterfaceStatsTxRx64 OBJECT-TYPE
@@ -2511,16 +2605,18 @@ mtxrInterfaceStatsTxRx1519ToMax OBJECT-TYPE
 
 mtxrInterfaceStatsRxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrInterfaceStatsEntry 31 }
 
 mtxrInterfaceStatsRxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrInterfaceStatsEntry 32 }
 
 mtxrInterfaceStatsRxTooShort OBJECT-TYPE
@@ -2686,16 +2782,18 @@ mtxrInterfaceStatsRxDrop OBJECT-TYPE
 
 mtxrInterfaceStatsTxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: bytes."
     ::= { mtxrInterfaceStatsEntry 61 }
 
 mtxrInterfaceStatsTxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: packets."
     ::= { mtxrInterfaceStatsEntry 62 }
 
 mtxrInterfaceStatsTxTooShort OBJECT-TYPE
@@ -3043,6 +3141,7 @@ mtxrPOEStatus OBJECT-TYPE
 
 mtxrPOEVoltage OBJECT-TYPE
     SYNTAX Voltage
+    UNITS "V"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "V"
@@ -3050,16 +3149,18 @@ mtxrPOEVoltage OBJECT-TYPE
 
 mtxrPOECurrent OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "mA"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "mA"
+    DESCRIPTION "Unit: mA."
     ::= { mtxrPOEEntry 5 }
 
 mtxrPOEPower OBJECT-TYPE
     SYNTAX Power
+    UNITS "W"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "W"
+    DESCRIPTION "Unit: W."
     ::= { mtxrPOEEntry 6 }
 
 mtxrPOEGroup OBJECT-GROUP OBJECTS {
@@ -3127,13 +3228,15 @@ mtxrLTEModemInterfaceIndex OBJECT-TYPE
 
 mtxrLTEModemSignalRSSI OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrLTEModemEntry 2 }
 
 mtxrLTEModemSignalRSRQ OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS deprecated
     DESCRIPTION "dB"
@@ -3141,9 +3244,10 @@ mtxrLTEModemSignalRSRQ OBJECT-TYPE
 
 mtxrLTEModemSignalRSRP OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrLTEModemEntry 4 }
 
 mtxrLTEModemCellId OBJECT-TYPE
@@ -3174,6 +3278,7 @@ mtxrLTEModemAccessTechnology OBJECT-TYPE
 
 mtxrLTEModemSignalSINR OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "dB"
@@ -3279,30 +3384,34 @@ mtxrLTEModemCQI OBJECT-TYPE
 
 mtxrLTEModemNrRSRP OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrLTEModemEntry 22 }
 
 mtxrLTEModemNrRSRQ OBJECT-TYPE
     SYNTAX IDiv10
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dB."
     ::= { mtxrLTEModemEntry 23 }
 
 mtxrLTEModemNrSINR OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dB."
     ::= { mtxrLTEModemEntry 24 }
 
 mtxrLTEModemSignalRSRQD10 OBJECT-TYPE
     SYNTAX IDiv10
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION ""
+    DESCRIPTION "Unit: dB."
     ::= { mtxrLTEModemEntry 25 }
 
 mtxrLTEModemGroup OBJECT-GROUP OBJECTS {
@@ -3401,9 +3510,10 @@ mtxrLTECarrierAggEARFCN OBJECT-TYPE
 
 mtxrLTECarrierAggBandwidth OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "MHz"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "MHz"
+    DESCRIPTION "Unit: MHz."
     ::= { mtxrLTECarrierAggEntry 5 }
 
 mtxrLTECarrierAggPhyCellId OBJECT-TYPE
@@ -3415,20 +3525,23 @@ mtxrLTECarrierAggPhyCellId OBJECT-TYPE
 
 mtxrLTECarrierAggRSSI OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrLTECarrierAggEntry 7 }
 
 mtxrLTECarrierAggRSRP OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dBm"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "dBm"
+    DESCRIPTION "Unit: dBm."
     ::= { mtxrLTECarrierAggEntry 8 }
 
 mtxrLTECarrierAggRSRQ OBJECT-TYPE
     SYNTAX IDiv10
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "dB"
@@ -3436,6 +3549,7 @@ mtxrLTECarrierAggRSRQ OBJECT-TYPE
 
 mtxrLTECarrierAggSINR OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "dB"
@@ -3443,6 +3557,7 @@ mtxrLTECarrierAggSINR OBJECT-TYPE
 
 mtxrLTECarrierAggSNR OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "dB"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "dB"
@@ -3592,9 +3707,10 @@ mtxrPartitionName OBJECT-TYPE
 
 mtxrPartitionSize OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "MB"
     MAX-ACCESS read-only
     STATUS current
-    DESCRIPTION "MB"
+    DESCRIPTION "Unit: MB."
     ::= { mtxrPartitionEntry 3 }
 
 mtxrPartitionVersion OBJECT-TYPE
@@ -4069,6 +4185,7 @@ mtxrIkeSADynamicAddress OBJECT-TYPE
 
 mtxrIkeSATxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "ph2 SA tx bytes"
@@ -4076,6 +4193,7 @@ mtxrIkeSATxBytes OBJECT-TYPE
 
 mtxrIkeSARxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "ph2 SA rx bytes"
@@ -4083,6 +4201,7 @@ mtxrIkeSARxBytes OBJECT-TYPE
 
 mtxrIkeSATxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "ph2 SA tx packets"
@@ -4090,6 +4209,7 @@ mtxrIkeSATxPackets OBJECT-TYPE
 
 mtxrIkeSARxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "ph2 SA rx packets"
@@ -4455,6 +4575,7 @@ mtxrWifiRegistrationRxRate OBJECT-TYPE
 
 mtxrWifiRegistrationTxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Number of transmitted packets."
@@ -4462,6 +4583,7 @@ mtxrWifiRegistrationTxPackets OBJECT-TYPE
 
 mtxrWifiRegistrationRxPackets OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "packets"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Number of received packets."
@@ -4469,6 +4591,7 @@ mtxrWifiRegistrationRxPackets OBJECT-TYPE
 
 mtxrWifiRegistrationTxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Number of transmitted bytes."
@@ -4476,6 +4599,7 @@ mtxrWifiRegistrationTxBytes OBJECT-TYPE
 
 mtxrWifiRegistrationRxBytes OBJECT-TYPE
     SYNTAX Counter64
+    UNITS "bytes"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Number of received bytes."
@@ -4483,6 +4607,7 @@ mtxrWifiRegistrationRxBytes OBJECT-TYPE
 
 mtxrWifiRegistrationTxBitsPerSecond OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Transmission rate in bits per second."
@@ -4490,6 +4615,7 @@ mtxrWifiRegistrationTxBitsPerSecond OBJECT-TYPE
 
 mtxrWifiRegistrationRxBitsPerSecond OBJECT-TYPE
     SYNTAX Integer32
+    UNITS "bits/second"
     MAX-ACCESS read-only
     STATUS current
     DESCRIPTION "Reception rate in bits per second."
